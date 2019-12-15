@@ -1,0 +1,105 @@
+class Employee:
+    
+    Total_emp = 0
+    rais = 0
+    emp_detail = []
+    emp_list = {}
+    
+    def __init__(self, name, last, position):
+        self.name = name
+        self.last = last
+        self.position = position
+        Employee.Total_emp +=1
+        Employee.emp_detail.append([self.name, self.last, self.position])
+        Employee.emp_list[Employee.Total_emp] = self.name, self.last, self.position
+    
+    def __str__(self):
+        return f'The employee is {self.name}  {self.last} and it position is {self.position}'
+    
+    @classmethod
+    def set_pay_increase(cls, increase):
+        cls.rais = increase
+      
+    @classmethod
+    def print_all_employees(cls):
+        for i in range(cls.Total_emp):
+            print(f'Employee number {i} is {Company.emp_detail[i][0]} {Company.emp_detail[i][1]} {Company.emp_detail[i][2]}')
+            class Hourly_Emp(Employee):
+    Hourly_emp= 0
+    def __init__(self, name, last, position, hour_pay):
+        super().__init__(name, last, position)
+        self.hour_pay = hour_pay
+        Hourly_Emp.Hourly_emp +=1
+        
+    def __str__(self):
+        return f'{self.name} {self.last} is {self.position}is paid {self.hour_pay}/hour'
+    
+    def show_new_pay(self):
+        new_pay = self.rais*self.hour_pay
+        return new_pay
+    
+
+class SalariedEmployee(Employee): 
+    Salarised_emp = 0
+    def __init__(self, name, last, position, annual_pay):
+        super().__init__(name, last, position)
+        self.annual_pay = annual_pay
+        SalariedEmployee.Salarised_emp +=1
+        
+    def __str__(self):
+        return f'{self.name} {self.last} is {self.position}is paid {self.annual_pay}/year'
+    
+    
+
+class Manager(Employee):
+    
+    No_of_Manager = 0
+    
+    def __init__(self, name, last, annual_pay, staff = None):
+        super().__init__(name, last, annual_pay)
+        if staff == None:
+            self.staff =[]
+        else:
+            self.staff = staff
+        Manager.No_of_Manager +=1
+    
+    def __str__(self):
+        return f'Your manager is {self.name} {self.last} and supervises {Employee.Total_emp}'
+  
+  
+class Executive(Employee):
+    Executive_emp = 0
+    def __init__(self, name, last, annual_pay, position):
+        super().__init__(name, last, annual_pay)
+        self.position = position 
+        Executive.Executive_emp +=1
+        
+    def __str__(self):
+        return self
+    
+
+class Company(Employee):
+    def __init__(self, Name, Address, Indutry):
+      
+        self.Address = Address
+        self.Indutry = Indutry
+        self.Name = Name
+    
+    def __str__(self):
+        return f'Your manager is {self.Name}, the HQ is in {self.Address} and has {Employee.Total_emp} out of which there are {Manager.No_of_Manager}'
+    @classmethod
+    def fire_employee(cls, num):
+        if num in Employee.emp_list:
+            del Employee.emp_list[num]
+            del Employee.emp_detail[num]
+            Employee.Total_emp -=1
+        else:
+            print("Employee not found")
+    
+    def hire_employee(self, emp):
+        pass
+    
+    @classmethod
+    def show_new_pay(cls):
+        new_anual_pay = cls.rais*cls.annual_pay
+        return cls.new_anual_pay
